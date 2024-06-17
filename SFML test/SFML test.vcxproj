@@ -133,7 +133,10 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="IManager.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Pipe.cpp" />
+    <ClCompile Include="PipeSpawner.cpp" />
     <ClCompile Include="SpriteEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +144,9 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="IManager.h" />
+    <ClInclude Include="Pipe.h" />
+    <ClInclude Include="PipeSpawner.h" />
     <ClInclude Include="SpriteEntity.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

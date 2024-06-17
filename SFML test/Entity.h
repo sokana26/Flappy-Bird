@@ -4,6 +4,7 @@
 class Entity
 {
 public:
+	virtual ~Entity() = default;
 	Entity(sf::Vector2f p, float r);
 	Entity() = default;
 
