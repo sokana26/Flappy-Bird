@@ -10,6 +10,7 @@ public:
 	void update(sf::Time delta_time) override;
 
 	float time_passed_ = 0.f;
-	float spawn_time_ = 3.f;
+	float spawn_time_ = 1.8f;
+	float get_random_y_position();
 };
 

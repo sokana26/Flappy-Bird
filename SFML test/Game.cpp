@@ -1,5 +1,5 @@
 #include "Game.h"
-#include  "Bird.h"
+#include "Bird.h"
 #include "Ground.h"
 #include "Pipe.h"
 #include "PipeSpawner.h"
@@ -13,38 +13,33 @@ void Game::run()
 
 void Game::init()
 {
-	window_ = std::make_shared<sf::RenderWindow>(sf::VideoMode(parameters::width, parameters::height), "Flappy Bird", sf::Style::Close);
-	auto const background = std::make_shared<SpriteEntity>("Sprites/background.png", sf::Vector2f{ 0, 0 }, 0);
-	auto const ground = std::make_shared<Ground>("Sprites/ground.png", sf::Vector2f{ 0, parameters::ground_level }, 0);
-	bird = std::make_shared<Bird>("Sprites/bird123.png", sf::Vector2f{ 50, 300 }, 0);
-	auto pipe_spawner = std::make_shared<PipeSpawner>(*this);
-	entity_list_.push_back(pipe_spawner);
-	entity_list_.push_back(background);
-	entity_list_.push_back(ground);
-	entity_list_.push_back(bird);
-}
+	_window = std::make_shared<sf::RenderWindow>(sf::VideoMode(parameters::width, parameters::height), "Flappy Bird", sf::Style::Close);
 
-void Game::post_update()
-{
-	if (!entities_to_create_.empty())
-	{
-		entity_list_.insert(entity_list_.end(), entities_to_create_.begin(), entities_to_create_.end());
-		entities_to_create_.clear();
-	}
+	auto background = std::make_shared<SpriteEntity>("Sprites/background.png", sf::Vector2f{ 0, 0 }, 0);
+	_entity_list.push_back(background);
+
+	_bird = std::make_shared<Bird>("Sprites/bird123.png", sf::Vector2f{ 50, 300 }, 0);
+	_entity_list.push_back(_bird);
+
+	auto ground = std::make_shared<Ground>("Sprites/ground.png", sf::Vector2f{ 0, parameters::ground_level }, 0);
+	_entity_list.push_back(ground);
+
+	auto pipe_spawner = std::make_shared<PipeSpawner>(*this);
+	_entity_list.push_back(pipe_spawner);
 }
 
 void Game::update()
 {
 	sf::Clock clock;
-	while (window_->isOpen())
+	while (_window->isOpen())
 	{
 		sf::Event evnt;
-		while (window_->pollEvent(evnt))
+		while (_window->pollEvent(evnt))
 		{
 			process_events(evnt);
 		}
 		sf::Time elapsed = clock.restart();
-		for (auto& entity : entity_list_) 
+		for (auto& entity : _entity_list) 
 		{
 			entity->update(elapsed);
 		}
@@ -53,13 +48,22 @@ void Game::update()
 	}
 }
 
+void Game::post_update() //		What if this function?
+{
+	if (!_entities_to_create.empty())
+	{
+		_entity_list.insert(_entity_list.end(), _entities_to_create.begin(), _entities_to_create.end());
+		_entities_to_create.clear();
+	}
+}
+
 void Game::draw()
 {
-	window_->clear();
-	for (auto entity : entity_list_) {
-		entity->draw(*window_);
+	_window->clear();
+	for (auto entity : _entity_list) {
+		entity->draw(*_window);
 	}
-	window_->display();
+	_window->display();
 }
 
 void Game::process_events(const sf::Event& evnt)
@@ -67,7 +71,7 @@ void Game::process_events(const sf::Event& evnt)
 	switch (evnt.type)
 	{
 	case sf::Event::Closed:
-		window_->close();
+		_window->close();
 		break;
 	case sf::Event::MouseButtonPressed:
 		on_mouse_button_pressed();
@@ -75,21 +79,22 @@ void Game::process_events(const sf::Event& evnt)
 	default:
 		break;
 	}
-	for (const auto &entity : entity_list_) {
+	for (const auto &entity : _entity_list) {
 		entity->processEvents(evnt);
 	}
 }
 
 void Game::on_mouse_button_pressed()
 {
-	bird->jump();
+	_bird->jump();
 }
 
 std::shared_ptr<Pipe> Game::spawn_pipe(const sf::Vector2f& initial_position)
 {
 	auto new_pipe = std::make_shared<Pipe>("Sprites/pipes.png", initial_position, 0);
-	entities_to_create_.push_back(new_pipe);
-	return new_pipe;
+	_entities_to_create.push_back(new_pipe);
+
+	return new_pipe;	// What's the point of returning new pipe?
 }
 
 void Game::exit()

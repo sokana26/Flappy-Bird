@@ -4,7 +4,7 @@
 Pipe::Pipe(const std::string& file_path, const sf::Vector2f& position, float rotation)
 	: SpriteEntity(file_path, position, rotation)
 {
-	entity_velocity_.x = -parameters::speed;
+	entity_velocity_.x = -parameters::ground_speed;
 
-	sprite_.setScale(0.2f, 0.2f);
+	sprite_.setScale(1.5f, 1.5f);
 }

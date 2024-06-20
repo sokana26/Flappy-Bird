@@ -2,7 +2,7 @@
 
 Bird::Bird(const std::string& file_path, sf::Vector2f position, float rotation) :SpriteEntity(file_path, position, rotation)
 {
-	sprite_.setScale(0.2, 0.2);
+	sprite_.setScale(0.22, 0.22);
 	sprite_.setTextureRect(bird_frame);
 	entity_rotation_ = -10.f;
 }

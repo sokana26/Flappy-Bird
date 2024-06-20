@@ -3,7 +3,7 @@
 
 Ground::Ground(const std::string& str, const sf::Vector2f& p, float r): SpriteEntity(str, p, r)
 {
-	entity_velocity_.x = -parameters::speed;
+	entity_velocity_.x = -parameters::ground_speed;
 }
 
 void Ground::update(sf::Time delta_time)

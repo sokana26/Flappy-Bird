@@ -134,7 +134,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="IManager.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Pipe.cpp" />
     <ClCompile Include="PipeSpawner.cpp" />
     <ClCompile Include="SpriteEntity.cpp" />
