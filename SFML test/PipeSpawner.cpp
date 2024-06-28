@@ -3,7 +3,7 @@
 #include <random>
 
 PipeSpawner::PipeSpawner(Game& game_ref)
-	: Entity({}, {})
+	: Entity({}, {}, {})
 	, IManager(game_ref)
 {
 }

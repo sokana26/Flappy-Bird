@@ -5,9 +5,10 @@ class Entity
 {
 public:
 	virtual ~Entity() = default;
-	Entity(sf::Vector2f p, float r);
+	Entity(sf::Vector2f p, float r, int priority);
 	Entity() = default;
 
+	int priority{};
 	virtual void init() {}
 	virtual void update(sf::Time delta_time);
 	virtual void processEvents(const sf::Event &evnt) {}
@@ -18,6 +19,11 @@ public:
 	
 	void setRotation(float rotation) { entity_rotation_ = rotation; }
 	float getRotation() const { return entity_rotation_; }
+
+	bool operator<(const Entity& p) const
+	{
+		return this->priority < p.priority;
+	}
 	
 protected:
 	sf::Vector2f entity_position_;

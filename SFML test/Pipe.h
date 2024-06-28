@@ -3,6 +3,6 @@
 class Pipe : public SpriteEntity
 {
 public:
-	Pipe(const std::string& file_path, const sf::Vector2f& position, float rotation);
+	Pipe(const std::string& file_path, const sf::Vector2f& position, float rotation, int priority);
 };
 

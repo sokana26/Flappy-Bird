@@ -1,6 +1,6 @@
 #include "SpriteEntity.h"
 
-SpriteEntity::SpriteEntity(const std::string& file_path, sf::Vector2f position, float rotation):Entity(position, rotation)
+SpriteEntity::SpriteEntity(const std::string& file_path, sf::Vector2f position, float rotation, int priority):Entity(position, rotation, priority)
 {
 	texture_.loadFromFile(file_path);
 	sprite_.setTexture(texture_);

@@ -4,7 +4,7 @@
 class Bird : public SpriteEntity
 {
 public:
-    Bird(const std::string& file_path, sf::Vector2f position, float rotation);
+    Bird(const std::string& file_path, sf::Vector2f position, float rotation, int priority);
 
     void update(sf::Time delta_time) override;
     void jump();

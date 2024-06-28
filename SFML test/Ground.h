@@ -4,7 +4,7 @@
 class Ground : public SpriteEntity
 {
 public:
-	Ground(const std::string& str, const sf::Vector2f& p, float r);
+	Ground(const std::string& str, const sf::Vector2f& p, float r, int priority);
 
 private:
 	void update(sf::Time delta_time) override;

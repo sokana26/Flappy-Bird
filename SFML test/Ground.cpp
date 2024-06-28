@@ -1,7 +1,7 @@
 #include "Ground.h"
 #include "Game.h"
 
-Ground::Ground(const std::string& str, const sf::Vector2f& p, float r): SpriteEntity(str, p, r)
+Ground::Ground(const std::string& str, const sf::Vector2f& p, float r, int priority): SpriteEntity(str, p, r, priority)
 {
 	entity_velocity_.x = -parameters::ground_speed;
 }

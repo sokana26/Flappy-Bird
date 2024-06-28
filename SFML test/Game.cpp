@@ -15,13 +15,13 @@ void Game::init()
 {
 	_window = std::make_shared<sf::RenderWindow>(sf::VideoMode(parameters::width, parameters::height), "Flappy Bird", sf::Style::Close);
 
-	auto background = std::make_shared<SpriteEntity>("Sprites/background.png", sf::Vector2f{ 0, 0 }, 0);
+	auto background = std::make_shared<SpriteEntity>("Sprites/background.png", sf::Vector2f{ 0, 0 }, 0, 1);
 	_entity_list.push_back(background);
 
-	_bird = std::make_shared<Bird>("Sprites/bird123.png", sf::Vector2f{ 50, 300 }, 0);
+	_bird = std::make_shared<Bird>("Sprites/bird123.png", sf::Vector2f{ 50, 300 }, 0, 2);
 	_entity_list.push_back(_bird);
 
-	auto ground = std::make_shared<Ground>("Sprites/ground.png", sf::Vector2f{ 0, parameters::ground_level }, 0);
+	auto ground = std::make_shared<Ground>("Sprites/ground.png", sf::Vector2f{ 0, parameters::ground_level }, 0, 4);
 	_entity_list.push_back(ground);
 
 	auto pipe_spawner = std::make_shared<PipeSpawner>(*this);
@@ -43,16 +43,16 @@ void Game::update()
 		{
 			entity->update(elapsed);
 		}
-		post_update();
 		draw();
+		post_update();
 	}
 }
 
-void Game::post_update() //		What if this function?
+void Game::post_update()
 {
 	if (!_entities_to_create.empty())
 	{
-		_entity_list.insert(_entity_list.end(), _entities_to_create.begin(), _entities_to_create.end());
+		_entity_list.insert(_entity_list.begin() + 2, _entities_to_create.begin(), _entities_to_create.end());
 		_entities_to_create.clear();
 	}
 }
@@ -60,9 +60,12 @@ void Game::post_update() //		What if this function?
 void Game::draw()
 {
 	_window->clear();
-	for (auto entity : _entity_list) {
+
+	for (auto entity : _entity_list) 
+	{
 		entity->draw(*_window);
 	}
+
 	_window->display();
 }
 
@@ -91,10 +94,10 @@ void Game::on_mouse_button_pressed()
 
 std::shared_ptr<Pipe> Game::spawn_pipe(const sf::Vector2f& initial_position)
 {
-	auto new_pipe = std::make_shared<Pipe>("Sprites/pipes.png", initial_position, 0);
+	auto new_pipe = std::make_shared<Pipe>("Sprites/pipes.png", initial_position, 0, 2);
 	_entities_to_create.push_back(new_pipe);
 
-	return new_pipe;	// What's the point of returning new pipe?
+	return new_pipe;
 }
 
 void Game::exit()

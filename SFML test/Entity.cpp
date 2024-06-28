@@ -1,8 +1,9 @@
 #include "Entity.h"
 
-Entity::Entity(sf::Vector2f position, float rotation)
+Entity::Entity(sf::Vector2f position, float rotation, int priority)
 	: entity_position_(position)
 	, entity_rotation_(rotation)
+	, priority(priority)
 {
 }
 

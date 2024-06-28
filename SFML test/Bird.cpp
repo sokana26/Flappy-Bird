@@ -1,8 +1,8 @@
 #include "Bird.h"
 
-Bird::Bird(const std::string& file_path, sf::Vector2f position, float rotation) :SpriteEntity(file_path, position, rotation)
+Bird::Bird(const std::string& file_path, sf::Vector2f position, float rotation, int priority) :SpriteEntity(file_path, position, rotation, priority)
 {
-	sprite_.setScale(0.22, 0.22);
+	sprite_.setScale(0.23, 0.23);
 	sprite_.setTextureRect(bird_frame);
 	entity_rotation_ = -10.f;
 }
