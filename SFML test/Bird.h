@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+
 #include "SpriteEntity.h"
 
 class Bird : public SpriteEntity
@@ -12,7 +14,7 @@ public:
 private:
     float max_down_speed_ { 400.f };
     float gravity_{ 2000.f };
-    sf::IntRect bird_frame{ 314, 0, 314, 204 };
+    sf::IntRect bird_frame{ {314, 0}, {314, 204} };
 
     float time_passed_ = 0.f;
     float switch_frame_time_ = 0.2f;

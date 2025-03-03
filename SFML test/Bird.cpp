@@ -1,10 +1,12 @@
 #include "Bird.h"
 
+#include <string>
+
 Bird::Bird(const std::string& file_path, sf::Vector2f position, float rotation, int priority) :SpriteEntity(file_path, position, rotation, priority)
 {
-	sprite_.setScale(0.23, 0.23);
+	sprite_.setScale({0.23f, 0.23f});
 	sprite_.setTextureRect(bird_frame);
-	entity_rotation_ = -10.f;
+	entity_rotation_ = sf::degrees(-10.f);
 }
 
 void Bird::update(sf::Time delta_time)
@@ -18,7 +20,7 @@ void Bird::update(sf::Time delta_time)
 	{
 		time_passed_ -= switch_frame_time_;
 		left_coord_ += frame_width_;
-		bird_frame.left = left_coord_ %= (frame_width_ * frame_number_);
+		bird_frame.position.x = left_coord_ %= (frame_width_ * frame_number_);
 		sprite_.setTextureRect(bird_frame);
 	}
 }

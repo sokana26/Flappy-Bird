@@ -6,5 +6,5 @@ Pipe::Pipe(const std::string& file_path, const sf::Vector2f& position, float rot
 {
 	entity_velocity_.x = -parameters::ground_speed;
 
-	sprite_.setScale(1.5f, 1.5f);
+	sprite_.setScale({1.5f, 1.5f});
 }

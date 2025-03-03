@@ -13,7 +13,7 @@ void Game::run()
 
 void Game::init()
 {
-	_window = std::make_shared<sf::RenderWindow>(sf::VideoMode(parameters::width, parameters::height), "Flappy Bird", sf::Style::Close);
+	_window = std::make_shared<sf::RenderWindow>(sf::VideoMode({ parameters::width, parameters::height }), "Flappy Bird", sf::Style::Close);
 
 	auto background = std::make_shared<SpriteEntity>("Sprites/background.png", sf::Vector2f{ 0, 0 }, 0, 1);
 	_entity_list.push_back(background);
@@ -33,13 +33,12 @@ void Game::update()
 	sf::Clock clock;
 	while (_window->isOpen())
 	{
-		sf::Event evnt;
-		while (_window->pollEvent(evnt))
+		while (const std::optional event = _window->pollEvent())
 		{
-			process_events(evnt);
+			process_events(event);
 		}
 		sf::Time elapsed = clock.restart();
-		for (auto& entity : _entity_list) 
+		for (auto& entity : _entity_list)
 		{
 			entity->update(elapsed);
 		}
@@ -61,7 +60,7 @@ void Game::draw()
 {
 	_window->clear();
 
-	for (auto entity : _entity_list) 
+	for (auto entity : _entity_list)
 	{
 		entity->draw(*_window);
 	}
@@ -69,21 +68,18 @@ void Game::draw()
 	_window->display();
 }
 
-void Game::process_events(const sf::Event& evnt)
+void Game::process_events(const std::optional<sf::Event>& event)
 {
-	switch (evnt.type)
-	{
-	case sf::Event::Closed:
+
+	if (event->is<sf::Event::Closed>())
 		_window->close();
-		break;
-	case sf::Event::MouseButtonPressed:
+
+	else if (event->is<sf::Event::MouseButtonPressed>())
 		on_mouse_button_pressed();
-		break;
-	default:
-		break;
-	}
-	for (const auto &entity : _entity_list) {
-		entity->processEvents(evnt);
+
+	for (const auto& entity : _entity_list)
+	{
+		entity->processEvents(event);
 	}
 }
 

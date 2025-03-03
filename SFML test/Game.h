@@ -26,7 +26,7 @@ public:
 	void update();
 	void draw();
 	void exit();
-	void process_events(const sf::Event& evnt);
+	void process_events(const std::optional<sf::Event>& event);
 	void on_mouse_button_pressed();
 	std::shared_ptr<Pipe> spawn_pipe(const sf::Vector2f& initial_position);
 
